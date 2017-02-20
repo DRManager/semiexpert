@@ -1,0 +1,34 @@
+baseurl = "/"
+publishDir = "docs"
+relativeurls = true
+languageCode = "en-us"
+title = "Lithium Theme"
+theme = "hugo-lithium-theme"
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+[[menu.main]]
+    name = "Home"
+    url = "https://drmanager.github.io/semiexpert"
+
+[params]
+    description = "A website for R learning and Semiconductor Nanomanufacturing."
+
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.9.0"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+
+    [params.logo]
+    url = "logo.png"
+    width = 50
+    height = 50
+    alt = "Logo"
+
