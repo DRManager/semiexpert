@@ -20,11 +20,11 @@
     </item>
     
     <item>
-      <title>Learning R and Application for Nanomanufacturing</title>
-      <link>/2017/02/19/learning-r-and-application-for-nanomanufacturing/</link>
+      <title>Motion Chart of Moore&#39;s Law</title>
+      <link>/2017/02/19/motion-chart-of-moores-law/</link>
       <pubDate>Sun, 19 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/02/19/learning-r-and-application-for-nanomanufacturing/</guid>
+      <guid>/2017/02/19/motion-chart-of-moores-law/</guid>
       <description>&lt;!-- BLOGDOWN-HEAD --&gt;
 
 
@@ -35,7 +35,298 @@
 
 &lt;!-- /BLOGDOWN-BODY-BEFORE --&gt;
 
-&lt;p&gt;This site is to share learning of using R and application to nanomanufacturing.&lt;/p&gt;
+&lt;div id=&#34;objectives&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Objectives&lt;/h2&gt;
+&lt;p&gt;Moore’s law has been the golden law to predict the semiconductor device size and guide the long-term planning of semiconductor industry in the last 3 decades. It has been accuractely describing a driving force behind technological and economical growth.&lt;/p&gt;
+&lt;p&gt;This post is to visualize Moore’s law in semiconductor manufacturing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;work-flow&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Work flow&lt;/h2&gt;
+&lt;p&gt;Main work flow to construct motion chart of Moore’s law require following steps:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Scape data from credible sources&lt;/li&gt;
+&lt;li&gt;Formate data for motion chart&lt;/li&gt;
+&lt;li&gt;Generate motion chart with GoogleVis package&lt;/li&gt;
+&lt;li&gt;Deploy to website with blogdown&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;solution&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Solution&lt;/h2&gt;
+&lt;div id=&#34;review-of-prior-art&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Review of Prior Art&lt;/h3&gt;
+&lt;p&gt;Moore’s law predicted that chip performance would double every 18 months, a driving force to shrink the device constantly over the time.&lt;/p&gt;
+&lt;p&gt;The data source of this report would be parsed from Wiki pages, which are reliable and consistent with other published results: &lt;a href=&#34;https://en.wikipedia.org/wiki/Moore%27s_law&#34;&gt;Moore’s Law&lt;/a&gt;, [device dimension] (&lt;a href=&#34;https://en.wikipedia.org/wiki/Semiconductor_device_fabrication&#34; class=&#34;uri&#34;&gt;https://en.wikipedia.org/wiki/Semiconductor_device_fabrication&lt;/a&gt;) and &lt;a href=&#34;https://en.wikipedia.org/wiki/Transistor_count&#34;&gt;transistor counts&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The data can be scrapped from html tables directly from R packages. This report start with manual construction of data table from above source.&lt;/p&gt;
+&lt;p&gt;Motion chart was first demonstrated by Hans Rosling. The chart is made possible by &lt;a href=&#34;https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html&#34;&gt;GoogleVis package&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;prepare-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Prepare data&lt;/h3&gt;
+&lt;p&gt;The data has been manually constructed in as a csv file. A minor issue with testing the notebook chuck and have to manually set the working directory&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 × 6
+##             Processor Count  year       Designer node.nm   Area
+##                 &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;          &amp;lt;chr&amp;gt;   &amp;lt;dbl&amp;gt;  &amp;lt;chr&amp;gt;
+## 1            TMS 1000  8000  1974             TI    8000   &amp;lt;NA&amp;gt;
+## 2          Intel 4004  2300  1971          Intel   10000 12 mm²
+## 3          Intel 8008  3500  1972          Intel   10000 14 mm²
+## 4 MOS Technology 6502  3510  1975 MOS Technology    8000 21 mm²
+## 5       Motorola 6800  4100  1974       Motorola    6000 16 mm²
+## 6          Intel 8080  4500  1974          Intel    6000 20 mm²&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Basic motion chart can be constructed by passing the time and id variables. To visualize the shrinking of device nodes and increasing transistor counts, it is better to visualize different vendor’s technology, such as Intel, TI, IBM and AMD.&lt;/p&gt;
+&lt;p&gt;Data clean-up needed:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Import html data table from wiki page&lt;/li&gt;
+&lt;li&gt;Remove notes to the year and nodes&lt;/li&gt;
+&lt;li&gt;Format year and process.node&lt;/li&gt;
+&lt;li&gt;Unique rows or idvar and time var&lt;/li&gt;
+&lt;li&gt;Set x axis to node.nm and y axis to transistor count&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD XHTML 1.0 Strict//EN&#34;
+  &#34;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&#34;&gt;
+&lt;html xmlns=&#34;http://www.w3.org/1999/xhtml&#34;&gt;
+&lt;head&gt;
+&lt;title&gt;
+MotionChartID181418a4593
+&lt;/title&gt;
+&lt;meta http-equiv=&#34;content-type&#34; content=&#34;text/html;charset=utf-8&#34; /&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+body {
+  color: #444444;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 75%;
+  }
+  a {
+  color: #4D87C7;
+  text-decoration: none;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;&lt;!-- MotionChart generated in R 3.3.2 by googleVis 0.6.2 package --&gt; &lt;!-- Sun Feb 19 23:33:41 2017 --&gt;&lt;/p&gt;
+&lt;!-- jsHeader --&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;
+ 
+// jsData 
+function gvisDataMotionChartID181418a4593 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+&#34;TI&#34;,
+1974,
+&#34;TMS 1000&#34;,
+8000,
+8000,
+null
+],
+[
+&#34;Intel&#34;,
+1971,
+&#34;Intel 4004&#34;,
+2300,
+10000,
+&#34;12 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1972,
+&#34;Intel 8008&#34;,
+3500,
+10000,
+&#34;14 mm²&#34;
+],
+[
+&#34;MOS Technology&#34;,
+1975,
+&#34;MOS Technology 6502&#34;,
+3510,
+8000,
+&#34;21 mm²&#34;
+],
+[
+&#34;Motorola&#34;,
+1974,
+&#34;Motorola 6800&#34;,
+4100,
+6000,
+&#34;16 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1974,
+&#34;Intel 8080&#34;,
+4500,
+6000,
+&#34;20 mm²&#34;
+],
+[
+&#34;RCA&#34;,
+1974,
+&#34;RCA 1802&#34;,
+5000,
+5000,
+&#34;27 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1976,
+&#34;Intel 8085&#34;,
+6500,
+3000,
+&#34;20 mm²&#34;
+],
+[
+&#34;Zilog&#34;,
+1976,
+&#34;Zilog Z80&#34;,
+8500,
+4000,
+&#34;18 mm²&#34;
+],
+[
+&#34;Motorola&#34;,
+1978,
+&#34;Motorola 6809&#34;,
+9000,
+5000,
+&#34;21 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1978,
+&#34;Intel 8086&#34;,
+29000,
+3000,
+&#34;33 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1979,
+&#34;Intel 8088&#34;,
+29000,
+3000,
+&#34;33 mm²&#34;
+] 
+];
+data.addColumn(&#39;string&#39;,&#39;Designer&#39;);
+data.addColumn(&#39;number&#39;,&#39;year&#39;);
+data.addColumn(&#39;string&#39;,&#39;Processor&#39;);
+data.addColumn(&#39;number&#39;,&#39;Count&#39;);
+data.addColumn(&#39;number&#39;,&#39;node.nm&#39;);
+data.addColumn(&#39;string&#39;,&#39;Area&#39;);
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartMotionChartID181418a4593() {
+var data = gvisDataMotionChartID181418a4593();
+var options = {};
+options[&#34;width&#34;] = 600;
+options[&#34;height&#34;] = 500;
+options[&#34;state&#34;] = &#34;\n{\&#34;xAxisOption\&#34;:\&#34;4\&#34;,\&#34;yAxisOption\&#34;:\&#34;3\&#34;,\&#34;dimensions\&#34;:{\&#34;iconDimensions\&#34;:[\&#34;dim0\&#34;]}}\n&#34;;
+
+    var chart = new google.visualization.MotionChart(
+    document.getElementById(&#39;MotionChartID181418a4593&#39;)
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = &#34;motionchart&#34;;
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage &amp;&amp; i &lt; pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartMotionChartID181418a4593);
+})();
+function displayChartMotionChartID181418a4593() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load(&#34;visualization&#34;, &#34;1&#34;, { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length &gt; 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+&lt;/script&gt;
+&lt;!-- jsChart --&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://www.google.com/jsapi?callback=displayChartMotionChartID181418a4593&#34;&gt;&lt;/script&gt;
+&lt;!-- divChart --&gt;
+&lt;div id=&#34;MotionChartID181418a4593&#34; style=&#34;width: 600; height: 500;&#34;&gt;
+
+&lt;/div&gt;
+&lt;div&gt;
+&lt;span&gt;Data: node • Chart ID: &lt;a href=&#34;Chart_MotionChartID181418a4593.html&#34;&gt;MotionChartID181418a4593&lt;/a&gt; • &lt;a href=&#34;https://github.com/mages/googleVis&#34;&gt;googleVis-0.6.2&lt;/a&gt;&lt;/span&gt;&lt;br /&gt; &lt;!-- htmlFooter --&gt; &lt;span&gt; R version 3.3.2 (2016-10-31) • &lt;a href=&#34;https://developers.google.com/terms/&#34;&gt;Google Terms of Use&lt;/a&gt; • &lt;a href=&#34;https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart&#34;&gt;Documentation and Data Policy&lt;/a&gt; &lt;/span&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;p&gt;Issues found:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Note to be able to display googleVis chart: resolved with macro setting on the manual&lt;/li&gt;
+&lt;li&gt;Default setting modification&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;round-up&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Round up&lt;/h2&gt;
+&lt;p&gt;Moore’s law recreated with motion chart and illustrated new players for the industry and their evolution.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>R and Its Application for Nanomanufacturing</title>
+      <link>/2017/02/19/r-and-its-application-for-nanomanufacturing/</link>
+      <pubDate>Sun, 19 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/02/19/r-and-its-application-for-nanomanufacturing/</guid>
+      <description>&lt;!-- BLOGDOWN-HEAD --&gt;
+
+
+
+&lt;!-- /BLOGDOWN-HEAD --&gt;
+
+&lt;!-- BLOGDOWN-BODY-BEFORE --&gt;
+
+&lt;!-- /BLOGDOWN-BODY-BEFORE --&gt;
+
+&lt;p&gt;This site is to share learning of R and its application to nanomanufacturing.&lt;/p&gt;
+&lt;p&gt;The planned format would includes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Problem statement&lt;/li&gt;
+&lt;li&gt;Work flow&lt;/li&gt;
+&lt;li&gt;Solution with R
+&lt;ul&gt;
+&lt;li&gt;Existing tools&lt;/li&gt;
+&lt;li&gt;New development&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Round up&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

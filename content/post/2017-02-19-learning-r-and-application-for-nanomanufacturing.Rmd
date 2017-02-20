@@ -1,9 +1,18 @@
 ---
-title: Learning R and Application for Nanomanufacturing
+title: R and Its Application for Nanomanufacturing
 author: Richard yang
 date: '2017-02-19'
 categories:
   - nanomanufacturing
 ---
 
-This site is to share learning of using R and application to nanomanufacturing.
+This site is to share learning of R and its application to nanomanufacturing.
+
+The planned format would includes:
+
+- Problem statement
+- Work flow
+- Solution with R
+    + Existing tools
+    + New development
+- Round up

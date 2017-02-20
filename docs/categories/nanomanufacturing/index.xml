@@ -9,11 +9,11 @@
     <atom:link href="/categories/nanomanufacturing/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Learning R and Application for Nanomanufacturing</title>
-      <link>/2017/02/19/learning-r-and-application-for-nanomanufacturing/</link>
+      <title>R and Its Application for Nanomanufacturing</title>
+      <link>/2017/02/19/r-and-its-application-for-nanomanufacturing/</link>
       <pubDate>Sun, 19 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/02/19/learning-r-and-application-for-nanomanufacturing/</guid>
+      <guid>/2017/02/19/r-and-its-application-for-nanomanufacturing/</guid>
       <description>&lt;!-- BLOGDOWN-HEAD --&gt;
 
 
@@ -24,7 +24,18 @@
 
 &lt;!-- /BLOGDOWN-BODY-BEFORE --&gt;
 
-&lt;p&gt;This site is to share learning of using R and application to nanomanufacturing.&lt;/p&gt;
+&lt;p&gt;This site is to share learning of R and its application to nanomanufacturing.&lt;/p&gt;
+&lt;p&gt;The planned format would includes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Problem statement&lt;/li&gt;
+&lt;li&gt;Work flow&lt;/li&gt;
+&lt;li&gt;Solution with R
+&lt;ul&gt;
+&lt;li&gt;Existing tools&lt;/li&gt;
+&lt;li&gt;New development&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Round up&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

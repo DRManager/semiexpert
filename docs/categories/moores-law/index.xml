@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Lithium Theme</title>
-    <link>/post/index.xml</link>
-    <description>Recent content in Posts on Lithium Theme</description>
+    <title>Moores Law on Lithium Theme</title>
+    <link>/categories/moores-law/index.xml</link>
+    <description>Recent content in Moores Law on Lithium Theme</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Feb 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/moores-law/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Motion Chart of Moore&#39;s Law</title>
@@ -286,37 +285,6 @@ callbacks.shift()();
 &lt;h2&gt;Round up&lt;/h2&gt;
 &lt;p&gt;Moore’s law recreated with motion chart and illustrated new players for the industry and their evolution.&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>R and Its Application for Nanomanufacturing</title>
-      <link>/2017/02/19/r-and-its-application-for-nanomanufacturing/</link>
-      <pubDate>Sun, 19 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/02/19/r-and-its-application-for-nanomanufacturing/</guid>
-      <description>&lt;!-- BLOGDOWN-HEAD --&gt;
-
-
-
-&lt;!-- /BLOGDOWN-HEAD --&gt;
-
-&lt;!-- BLOGDOWN-BODY-BEFORE --&gt;
-
-&lt;!-- /BLOGDOWN-BODY-BEFORE --&gt;
-
-&lt;p&gt;This site is to share learning of R and its application to nanomanufacturing.&lt;/p&gt;
-&lt;p&gt;The planned format would includes:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Problem statement&lt;/li&gt;
-&lt;li&gt;Work flow&lt;/li&gt;
-&lt;li&gt;Solution with R
-&lt;ul&gt;
-&lt;li&gt;Existing tools&lt;/li&gt;
-&lt;li&gt;New development&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Round up&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
