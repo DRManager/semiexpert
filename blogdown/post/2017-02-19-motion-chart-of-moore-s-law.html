@@ -1,5 +1,5 @@
 ---
-title: "Motion Chart of Moore's Law"
+title: "Moore's Law in Motion"
 author: "Richard Yang"
 date: '2017-02-19'
 categories:
@@ -19,7 +19,7 @@ categories:
 
 <div id="objectives" class="section level2">
 <h2>Objectives</h2>
-<p>Moore’s law has been the golden law to predict the semiconductor device size and guide the long-term planning of semiconductor industry in the last 3 decades. It has been accuractely describing a driving force behind technological and economical growth.</p>
+<p>Moore’s law has been the golden law to predict the semiconductor device size and guide the long-term planning of semiconductor industry in the last 3 decades. It has been accurately describing a driving force behind technological and economical growth.</p>
 <p>This post is to visualize Moore’s law in semiconductor manufacturing.</p>
 </div>
 <div id="work-flow" class="section level2">
@@ -27,7 +27,7 @@ categories:
 <p>Main work flow to construct motion chart of Moore’s law require following steps:</p>
 <ol style="list-style-type: decimal">
 <li>Scape data from credible sources</li>
-<li>Formate data for motion chart</li>
+<li>Format data for motion chart</li>
 <li>Generate motion chart with GoogleVis package</li>
 <li>Deploy to website with blogdown</li>
 </ol>
@@ -37,37 +37,47 @@ categories:
 <div id="review-of-prior-art" class="section level3">
 <h3>Review of Prior Art</h3>
 <p>Moore’s law predicted that chip performance would double every 18 months, a driving force to shrink the device constantly over the time.</p>
-<p>The data source of this report would be parsed from Wiki pages, which are reliable and consistent with other published results: <a href="https://en.wikipedia.org/wiki/Moore%27s_law">Moore’s Law</a>, [device dimension] (<a href="https://en.wikipedia.org/wiki/Semiconductor_device_fabrication" class="uri">https://en.wikipedia.org/wiki/Semiconductor_device_fabrication</a>) and <a href="https://en.wikipedia.org/wiki/Transistor_count">transistor counts</a>.</p>
+<p>The data source of this report would be parsed from Wiki pages, which are reliable and consistent with other published results: <a href="https://en.wikipedia.org/wiki/Moore%27s_law">Moore’s Law</a>, <a href="https://en.wikipedia.org/wiki/Semiconductor_device_fabrication">device dimension</a> and <a href="https://en.wikipedia.org/wiki/Transistor_count">transistor counts</a>.</p>
 <p>The data can be scrapped from html tables directly from R packages. This report start with manual construction of data table from above source.</p>
-<p>Motion chart was first demonstrated by Hans Rosling. The chart is made possible by <a href="https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html">GoogleVis package</a>.</p>
+<p>Motion chart was first demonstrated by Hans Rosling. The chart is made possible by <a href="https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html">googleVis package</a>.</p>
 </div>
 <div id="prepare-data" class="section level3">
 <h3>Prepare data</h3>
 <p>The data has been manually constructed in as a csv file. A minor issue with testing the notebook chuck and have to manually set the working directory</p>
 <pre><code>## # A tibble: 6 × 6
-##             Processor Count  year       Designer node.nm   Area
-##                 &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;          &lt;chr&gt;   &lt;dbl&gt;  &lt;chr&gt;
-## 1            TMS 1000  8000  1974             TI    8000   &lt;NA&gt;
-## 2          Intel 4004  2300  1971          Intel   10000 12 mm²
-## 3          Intel 8008  3500  1972          Intel   10000 14 mm²
-## 4 MOS Technology 6502  3510  1975 MOS Technology    8000 21 mm²
-## 5       Motorola 6800  4100  1974       Motorola    6000 16 mm²
-## 6          Intel 8080  4500  1974          Intel    6000 20 mm²</code></pre>
+##       Processor Count  year Designer node.nm   Area
+##           &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;chr&gt;   &lt;dbl&gt;  &lt;chr&gt;
+## 1    Intel 4004  2300  1971    Intel   10000 12 mm²
+## 2    Intel 8008  3500  1972    Intel   10000 14 mm²
+## 3      TMS 1000  8000  1974       TI    8000   &lt;NA&gt;
+## 4 Motorola 6800  4100  1974 Motorola    6000 16 mm²
+## 5    Intel 8080  4500  1974    Intel    6000 20 mm²
+## 6      RCA 1802  5000  1974      RCA    5000 27 mm²</code></pre>
 <p>Basic motion chart can be constructed by passing the time and id variables. To visualize the shrinking of device nodes and increasing transistor counts, it is better to visualize different vendor’s technology, such as Intel, TI, IBM and AMD.</p>
-<p>Data clean-up needed:</p>
+</div>
+<div id="clean-up-data" class="section level3">
+<h3>Clean up data:</h3>
 <ol style="list-style-type: decimal">
 <li>Import html data table from wiki page</li>
 <li>Remove notes to the year and nodes</li>
-<li>Format year and process.node</li>
-<li>Unique rows or idvar and time var</li>
-<li>Set x axis to node.nm and y axis to transistor count</li>
+<li>Format year and process.node to be numeric</li>
 </ol>
+</div>
+<div id="motion-chart" class="section level3">
+<h3>Motion Chart</h3>
+<p>This is to illustrate the shrink of device node over time and increasing transistor count. idvar has been set to Designer to illustrate various player over the time. One unique performer is Intel could been seen growth over time.</p>
+<pre class="r"><code>M &lt;- gvisMotionChart(node, 
+                       idvar=&quot;Designer&quot;, 
+                       timevar=&quot;year&quot;,
+                       xvar=&quot;node.nm&quot;,
+                       yvar=&quot;Count&quot;)
+print(M)</code></pre>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>
-MotionChartID181418a4593
+MotionChartID293876222b0f
 </title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <style type="text/css">
@@ -83,24 +93,16 @@ body {
 </style>
 </head>
 <body>
-<p><!-- MotionChart generated in R 3.3.2 by googleVis 0.6.2 package --> <!-- Sun Feb 19 23:33:41 2017 --></p>
+<p><!-- MotionChart generated in R 3.3.2 by googleVis 0.6.2 package --> <!-- Mon Feb 20 13:25:09 2017 --></p>
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataMotionChartID181418a4593 () {
+function gvisDataMotionChartID293876222b0f () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
  [
-"TI",
-1974,
-"TMS 1000",
-8000,
-8000,
-null
-],
-[
 "Intel",
 1971,
 "Intel 4004",
@@ -117,12 +119,12 @@ null
 "14 mm²"
 ],
 [
-"MOS Technology",
-1975,
-"MOS Technology 6502",
-3510,
+"TI",
+1974,
+"TMS 1000",
 8000,
-"21 mm²"
+8000,
+null
 ],
 [
 "Motorola",
@@ -147,6 +149,14 @@ null
 5000,
 5000,
 "27 mm²"
+],
+[
+"MOS Technology",
+1975,
+"MOS Technology 6502",
+3510,
+8000,
+"21 mm²"
 ],
 [
 "Intel",
@@ -181,12 +191,484 @@ null
 "33 mm²"
 ],
 [
+"Motorola",
+1979,
+"Motorola 68000",
+68000,
+3500,
+"44 mm²"
+],
+[
 "Intel",
 1979,
 "Intel 8088",
 29000,
-3000,
+30000,
 "33 mm²"
+],
+[
+"WDC",
+1981,
+"WDC 65C02",
+11500,
+3000,
+"6 mm²"
+],
+[
+"Intel",
+1982,
+"Intel 80286",
+134000,
+1500,
+"49 mm²"
+],
+[
+"WDC",
+1983,
+"WDC 65C816",
+22000,
+1500,
+"9 mm²"
+],
+[
+"Motorola",
+1984,
+"Motorola 68020",
+190000,
+2000,
+"85 mm²"
+],
+[
+"Intel",
+1985,
+"Intel 80386",
+275000,
+1500,
+"104 mm²"
+],
+[
+"Acorn",
+1985,
+"ARM 1",
+25000,
+3000,
+"50 mm²"
+],
+[
+"Harris Corporation",
+1985,
+"Novix NC4016",
+16000,
+3000,
+null
+],
+[
+"Acorn",
+1986,
+"ARM 2",
+30000,
+2000,
+"30 mm²"
+],
+[
+"TI",
+1987,
+"TI Explorer's 32-bit Lisp machine chip",
+553000,
+2000,
+null
+],
+[
+"DEC WRL",
+1988,
+"DEC WRL MultiTitan",
+180000,
+1500,
+"61 mm²"
+],
+[
+"Intel",
+1988,
+"Intel i960",
+250000,
+600,
+null
+],
+[
+"Intel",
+1989,
+"Intel 80486",
+1180235,
+1000,
+"173 mm²"
+],
+[
+"Acorn",
+1989,
+"ARM 3",
+3e+05,
+1000,
+null
+],
+[
+"MIPS",
+1991,
+"R4000",
+1350000,
+1000,
+"213 mm²"
+],
+[
+"ARM",
+1991,
+"ARM 6",
+35000,
+1000,
+null
+],
+[
+"Intel",
+1993,
+"Pentium",
+3100000,
+800,
+"294 mm²"
+],
+[
+"ARM",
+1994,
+"ARM700",
+578977,
+800,
+"68.51 mm²"
+],
+[
+"Acorn/DEC/Apple",
+1995,
+"SA-110",
+2500000,
+350,
+"50 mm²"
+],
+[
+"Intel",
+1995,
+"Pentium Pro",
+5500000,
+500,
+"307 mm²"
+],
+[
+"AMD",
+1996,
+"AMD K5",
+4300000,
+500,
+"251 mm²"
+],
+[
+"Intel",
+1997,
+"Pentium II Klamath",
+7500000,
+350,
+"195 mm²"
+],
+[
+"AMD",
+1997,
+"AMD K6",
+8800000,
+350,
+"162 mm²"
+],
+[
+"Intel",
+1998,
+"Pentium II Deschutes",
+7500000,
+250,
+"113 mm²"
+],
+[
+"Acorn",
+1999,
+"ARM 9TDMI",
+111000,
+350,
+"4.8 mm²"
+],
+[
+"Intel",
+1999,
+"Pentium II Mobile Dixon",
+27400000,
+180,
+"180 mm²"
+],
+[
+"AMD",
+1999,
+"AMD K7",
+2.2e+07,
+250,
+"184 mm²"
+],
+[
+"Intel",
+2000,
+"Pentium III Coppermine",
+2.1e+07,
+180,
+"80 mm²"
+],
+[
+"Intel",
+2001,
+"Pentium III Tualatin",
+4.5e+07,
+130,
+"81 mm²"
+],
+[
+"Intel",
+2002,
+"Pentium 4 Northwood",
+5.5e+07,
+130,
+"145 mm²"
+],
+[
+"AMD",
+2003,
+"Barton",
+54300000,
+130,
+"101 mm²"
+],
+[
+"Intel",
+2004,
+"Pentium 4 Prescott",
+1.12e+08,
+90,
+"110 mm²"
+],
+[
+"Intel",
+2005,
+"Pentium 4 Prescott-2M",
+1.69e+08,
+90,
+"143 mm²"
+],
+[
+"Intel",
+2006,
+"Pentium 4 Cedar Mill",
+1.84e+08,
+65,
+"90 mm²"
+],
+[
+"Sony/IBM/Toshiba",
+2006,
+"Cell",
+2.41e+08,
+90,
+"221 mm²"
+],
+[
+"Intel",
+2007,
+"Core 2 Duo Allendale",
+1.69e+08,
+65,
+"111 mm²"
+],
+[
+"AMD",
+2007,
+"AMD K10 quad-core 2M L3",
+4.63e+08,
+65,
+"283 mm²"
+],
+[
+"ARM",
+2007,
+"ARM Cortex-A9",
+2.6e+07,
+45,
+"31 mm²"
+],
+[
+"IBM",
+2007,
+"POWER6",
+7.89e+08,
+65,
+"341 mm²"
+],
+[
+"Intel",
+2008,
+"Atom",
+4.7e+07,
+45,
+"24 mm²"
+],
+[
+"AMD",
+2008,
+"AMD K10 quad-core 6M L3",
+7.58e+08,
+45,
+"258 mm²"
+],
+[
+"AMD",
+2009,
+"Six-core Opteron 2400",
+9.04e+08,
+45,
+"346 mm²"
+],
+[
+"Sun/Oracle",
+2010,
+"16-core SPARC T3",
+1e+09,
+40,
+"377 mm²"
+],
+[
+"IBM",
+2010,
+"8-core POWER7 32M L3",
+1.2e+09,
+45,
+"567 mm²"
+],
+[
+"Intel",
+2011,
+"Quad-core + GPU Core i7",
+1.16e+09,
+32,
+"216 mm²"
+],
+[
+"AMD",
+2012,
+"8-core AMD Bulldozer",
+1.2e+09,
+32,
+"315 mm²"
+],
+[
+"Intel",
+2012,
+"Quad-core + GPU Core i7 Ivy Bridge",
+1.4e+09,
+22,
+"160 mm²"
+],
+[
+"IBM",
+2012,
+"8-core POWER7+ 80 MB L3 cache",
+2.1e+09,
+32,
+"567 mm²"
+],
+[
+"Apple",
+2013,
+"Apple A7 (dual-core ARM64 \"mobile SoC\")",
+1e+09,
+28,
+"102 mm²"
+],
+[
+"Intel",
+2013,
+"Six-core Core i7 Ivy Bridge E",
+1.86e+09,
+22,
+"256 mm²"
+],
+[
+"IBM",
+2013,
+"12-core POWER8",
+4.2e+09,
+22,
+"650 mm²"
+],
+[
+"Microsoft/AMD",
+2013,
+"Xbox One main SoC",
+5e+09,
+28,
+"363 mm²"
+],
+[
+"Intel",
+2014,
+"Quad-core + GPU Core i7 Haswell",
+1.4e+09,
+22,
+"177 mm²"
+],
+[
+"Apple",
+2014,
+"Apple A8 (dual-core ARM64 \"mobile SoC\")",
+2e+09,
+20,
+"89 mm²"
+],
+[
+"Intel",
+2015,
+"Quad-core + GPU GT2 Core i7 Skylake K",
+1.75e+09,
+14,
+"122 mm²"
+],
+[
+"IBM",
+2015,
+"IBM z13",
+3.99e+09,
+22,
+"678 mm²"
+],
+[
+"Oracle",
+2015,
+"SPARC M7",
+1e+10,
+20,
+null
+],
+[
+"Apple",
+2016,
+"Apple A10 (quad-core ARM64 \"mobile SoC\")",
+3.3e+09,
+16,
+"125 mm²"
+],
+[
+"Intel",
+2016,
+"22-core Xeon Broadwell-E5",
+7.2e+09,
+14,
+"456 mm²"
 ] 
 ];
 data.addColumn('string','Designer');
@@ -200,15 +682,15 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartMotionChartID181418a4593() {
-var data = gvisDataMotionChartID181418a4593();
+function drawChartMotionChartID293876222b0f() {
+var data = gvisDataMotionChartID293876222b0f();
 var options = {};
 options["width"] = 600;
 options["height"] = 500;
 options["state"] = "\n{\"xAxisOption\":\"4\",\"yAxisOption\":\"3\",\"dimensions\":{\"iconDimensions\":[\"dim0\"]}}\n";
 
     var chart = new google.visualization.MotionChart(
-    document.getElementById('MotionChartID181418a4593')
+    document.getElementById('MotionChartID293876222b0f')
     );
     chart.draw(data,options);
     
@@ -232,9 +714,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartMotionChartID181418a4593);
+callbacks.push(drawChartMotionChartID293876222b0f);
 })();
-function displayChartMotionChartID181418a4593() {
+function displayChartMotionChartID293876222b0f() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -257,20 +739,20 @@ callbacks.shift()();
 // jsFooter
 </script>
 <!-- jsChart -->
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID181418a4593"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID293876222b0f"></script>
 <!-- divChart -->
-<div id="MotionChartID181418a4593" style="width: 600; height: 500;">
+<div id="MotionChartID293876222b0f" style="width: 600; height: 500;">
 
 </div>
 <div>
-<span>Data: node • Chart ID: <a href="Chart_MotionChartID181418a4593.html">MotionChartID181418a4593</a> • <a href="https://github.com/mages/googleVis">googleVis-0.6.2</a></span><br /> <!-- htmlFooter --> <span> R version 3.3.2 (2016-10-31) • <a href="https://developers.google.com/terms/">Google Terms of Use</a> • <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart">Documentation and Data Policy</a> </span>
+<span>Data: node • Chart ID: <a href="Chart_MotionChartID293876222b0f.html">MotionChartID293876222b0f</a> • <a href="https://github.com/mages/googleVis">googleVis-0.6.2</a></span><br /> <!-- htmlFooter --> <span> R version 3.3.2 (2016-10-31) • <a href="https://developers.google.com/terms/">Google Terms of Use</a> • <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart">Documentation and Data Policy</a> </span>
 </div>
 </body>
 </html>
-<p>Issues found:</p>
+<p>Issues found and resolved:</p>
 <ul>
-<li>Note to be able to display googleVis chart: resolved with macro setting on the manual</li>
-<li>Default setting modification</li>
+<li>Display googleVis chart locally: resolved with security setting of <a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html">macromedia</a></li>
+<li>Settings for rmarkdown “op &lt;- options(gvis.plot.tag=‘chart’)” and place “results=‘asis’” in the chuck option</li>
 </ul>
 </div>
 </div>

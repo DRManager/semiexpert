@@ -10,11 +10,11 @@
     <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Motion Chart of Moore&#39;s Law</title>
-      <link>/2017/02/19/motion-chart-of-moores-law/</link>
+      <title>Moore&#39;s Law in Motion</title>
+      <link>/2017/02/19/moores-law-in-motion/</link>
       <pubDate>Sun, 19 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/02/19/motion-chart-of-moores-law/</guid>
+      <guid>/2017/02/19/moores-law-in-motion/</guid>
       <description>&lt;!-- BLOGDOWN-HEAD --&gt;
 
 
@@ -27,7 +27,7 @@
 
 &lt;div id=&#34;objectives&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Objectives&lt;/h2&gt;
-&lt;p&gt;Moore’s law has been the golden law to predict the semiconductor device size and guide the long-term planning of semiconductor industry in the last 3 decades. It has been accuractely describing a driving force behind technological and economical growth.&lt;/p&gt;
+&lt;p&gt;Moore’s law has been the golden law to predict the semiconductor device size and guide the long-term planning of semiconductor industry in the last 3 decades. It has been accurately describing a driving force behind technological and economical growth.&lt;/p&gt;
 &lt;p&gt;This post is to visualize Moore’s law in semiconductor manufacturing.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;work-flow&#34; class=&#34;section level2&#34;&gt;
@@ -35,7 +35,7 @@
 &lt;p&gt;Main work flow to construct motion chart of Moore’s law require following steps:&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Scape data from credible sources&lt;/li&gt;
-&lt;li&gt;Formate data for motion chart&lt;/li&gt;
+&lt;li&gt;Format data for motion chart&lt;/li&gt;
 &lt;li&gt;Generate motion chart with GoogleVis package&lt;/li&gt;
 &lt;li&gt;Deploy to website with blogdown&lt;/li&gt;
 &lt;/ol&gt;
@@ -45,37 +45,47 @@
 &lt;div id=&#34;review-of-prior-art&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Review of Prior Art&lt;/h3&gt;
 &lt;p&gt;Moore’s law predicted that chip performance would double every 18 months, a driving force to shrink the device constantly over the time.&lt;/p&gt;
-&lt;p&gt;The data source of this report would be parsed from Wiki pages, which are reliable and consistent with other published results: &lt;a href=&#34;https://en.wikipedia.org/wiki/Moore%27s_law&#34;&gt;Moore’s Law&lt;/a&gt;, [device dimension] (&lt;a href=&#34;https://en.wikipedia.org/wiki/Semiconductor_device_fabrication&#34; class=&#34;uri&#34;&gt;https://en.wikipedia.org/wiki/Semiconductor_device_fabrication&lt;/a&gt;) and &lt;a href=&#34;https://en.wikipedia.org/wiki/Transistor_count&#34;&gt;transistor counts&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The data source of this report would be parsed from Wiki pages, which are reliable and consistent with other published results: &lt;a href=&#34;https://en.wikipedia.org/wiki/Moore%27s_law&#34;&gt;Moore’s Law&lt;/a&gt;, &lt;a href=&#34;https://en.wikipedia.org/wiki/Semiconductor_device_fabrication&#34;&gt;device dimension&lt;/a&gt; and &lt;a href=&#34;https://en.wikipedia.org/wiki/Transistor_count&#34;&gt;transistor counts&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The data can be scrapped from html tables directly from R packages. This report start with manual construction of data table from above source.&lt;/p&gt;
-&lt;p&gt;Motion chart was first demonstrated by Hans Rosling. The chart is made possible by &lt;a href=&#34;https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html&#34;&gt;GoogleVis package&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Motion chart was first demonstrated by Hans Rosling. The chart is made possible by &lt;a href=&#34;https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html&#34;&gt;googleVis package&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;prepare-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Prepare data&lt;/h3&gt;
 &lt;p&gt;The data has been manually constructed in as a csv file. A minor issue with testing the notebook chuck and have to manually set the working directory&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 6 × 6
-##             Processor Count  year       Designer node.nm   Area
-##                 &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;          &amp;lt;chr&amp;gt;   &amp;lt;dbl&amp;gt;  &amp;lt;chr&amp;gt;
-## 1            TMS 1000  8000  1974             TI    8000   &amp;lt;NA&amp;gt;
-## 2          Intel 4004  2300  1971          Intel   10000 12 mm²
-## 3          Intel 8008  3500  1972          Intel   10000 14 mm²
-## 4 MOS Technology 6502  3510  1975 MOS Technology    8000 21 mm²
-## 5       Motorola 6800  4100  1974       Motorola    6000 16 mm²
-## 6          Intel 8080  4500  1974          Intel    6000 20 mm²&lt;/code&gt;&lt;/pre&gt;
+##       Processor Count  year Designer node.nm   Area
+##           &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;dbl&amp;gt;  &amp;lt;chr&amp;gt;
+## 1    Intel 4004  2300  1971    Intel   10000 12 mm²
+## 2    Intel 8008  3500  1972    Intel   10000 14 mm²
+## 3      TMS 1000  8000  1974       TI    8000   &amp;lt;NA&amp;gt;
+## 4 Motorola 6800  4100  1974 Motorola    6000 16 mm²
+## 5    Intel 8080  4500  1974    Intel    6000 20 mm²
+## 6      RCA 1802  5000  1974      RCA    5000 27 mm²&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Basic motion chart can be constructed by passing the time and id variables. To visualize the shrinking of device nodes and increasing transistor counts, it is better to visualize different vendor’s technology, such as Intel, TI, IBM and AMD.&lt;/p&gt;
-&lt;p&gt;Data clean-up needed:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;clean-up-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Clean up data:&lt;/h3&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Import html data table from wiki page&lt;/li&gt;
 &lt;li&gt;Remove notes to the year and nodes&lt;/li&gt;
-&lt;li&gt;Format year and process.node&lt;/li&gt;
-&lt;li&gt;Unique rows or idvar and time var&lt;/li&gt;
-&lt;li&gt;Set x axis to node.nm and y axis to transistor count&lt;/li&gt;
+&lt;li&gt;Format year and process.node to be numeric&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;motion-chart&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Motion Chart&lt;/h3&gt;
+&lt;p&gt;This is to illustrate the shrink of device node over time and increasing transistor count. idvar has been set to Designer to illustrate various player over the time. One unique performer is Intel could been seen growth over time.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;M &amp;lt;- gvisMotionChart(node, 
+                       idvar=&amp;quot;Designer&amp;quot;, 
+                       timevar=&amp;quot;year&amp;quot;,
+                       xvar=&amp;quot;node.nm&amp;quot;,
+                       yvar=&amp;quot;Count&amp;quot;)
+print(M)&lt;/code&gt;&lt;/pre&gt;
 &lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD XHTML 1.0 Strict//EN&#34;
   &#34;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&#34;&gt;
 &lt;html xmlns=&#34;http://www.w3.org/1999/xhtml&#34;&gt;
 &lt;head&gt;
 &lt;title&gt;
-MotionChartID181418a4593
+MotionChartID293876222b0f
 &lt;/title&gt;
 &lt;meta http-equiv=&#34;content-type&#34; content=&#34;text/html;charset=utf-8&#34; /&gt;
 &lt;style type=&#34;text/css&#34;&gt;
@@ -91,24 +101,16 @@ body {
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;p&gt;&lt;!-- MotionChart generated in R 3.3.2 by googleVis 0.6.2 package --&gt; &lt;!-- Sun Feb 19 23:33:41 2017 --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;!-- MotionChart generated in R 3.3.2 by googleVis 0.6.2 package --&gt; &lt;!-- Mon Feb 20 13:25:09 2017 --&gt;&lt;/p&gt;
 &lt;!-- jsHeader --&gt;
 &lt;script type=&#34;text/javascript&#34;&gt;
  
 // jsData 
-function gvisDataMotionChartID181418a4593 () {
+function gvisDataMotionChartID293876222b0f () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
  [
-&#34;TI&#34;,
-1974,
-&#34;TMS 1000&#34;,
-8000,
-8000,
-null
-],
-[
 &#34;Intel&#34;,
 1971,
 &#34;Intel 4004&#34;,
@@ -125,12 +127,12 @@ null
 &#34;14 mm²&#34;
 ],
 [
-&#34;MOS Technology&#34;,
-1975,
-&#34;MOS Technology 6502&#34;,
-3510,
+&#34;TI&#34;,
+1974,
+&#34;TMS 1000&#34;,
 8000,
-&#34;21 mm²&#34;
+8000,
+null
 ],
 [
 &#34;Motorola&#34;,
@@ -155,6 +157,14 @@ null
 5000,
 5000,
 &#34;27 mm²&#34;
+],
+[
+&#34;MOS Technology&#34;,
+1975,
+&#34;MOS Technology 6502&#34;,
+3510,
+8000,
+&#34;21 mm²&#34;
 ],
 [
 &#34;Intel&#34;,
@@ -189,12 +199,484 @@ null
 &#34;33 mm²&#34;
 ],
 [
+&#34;Motorola&#34;,
+1979,
+&#34;Motorola 68000&#34;,
+68000,
+3500,
+&#34;44 mm²&#34;
+],
+[
 &#34;Intel&#34;,
 1979,
 &#34;Intel 8088&#34;,
 29000,
-3000,
+30000,
 &#34;33 mm²&#34;
+],
+[
+&#34;WDC&#34;,
+1981,
+&#34;WDC 65C02&#34;,
+11500,
+3000,
+&#34;6 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1982,
+&#34;Intel 80286&#34;,
+134000,
+1500,
+&#34;49 mm²&#34;
+],
+[
+&#34;WDC&#34;,
+1983,
+&#34;WDC 65C816&#34;,
+22000,
+1500,
+&#34;9 mm²&#34;
+],
+[
+&#34;Motorola&#34;,
+1984,
+&#34;Motorola 68020&#34;,
+190000,
+2000,
+&#34;85 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1985,
+&#34;Intel 80386&#34;,
+275000,
+1500,
+&#34;104 mm²&#34;
+],
+[
+&#34;Acorn&#34;,
+1985,
+&#34;ARM 1&#34;,
+25000,
+3000,
+&#34;50 mm²&#34;
+],
+[
+&#34;Harris Corporation&#34;,
+1985,
+&#34;Novix NC4016&#34;,
+16000,
+3000,
+null
+],
+[
+&#34;Acorn&#34;,
+1986,
+&#34;ARM 2&#34;,
+30000,
+2000,
+&#34;30 mm²&#34;
+],
+[
+&#34;TI&#34;,
+1987,
+&#34;TI Explorer&#39;s 32-bit Lisp machine chip&#34;,
+553000,
+2000,
+null
+],
+[
+&#34;DEC WRL&#34;,
+1988,
+&#34;DEC WRL MultiTitan&#34;,
+180000,
+1500,
+&#34;61 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1988,
+&#34;Intel i960&#34;,
+250000,
+600,
+null
+],
+[
+&#34;Intel&#34;,
+1989,
+&#34;Intel 80486&#34;,
+1180235,
+1000,
+&#34;173 mm²&#34;
+],
+[
+&#34;Acorn&#34;,
+1989,
+&#34;ARM 3&#34;,
+3e+05,
+1000,
+null
+],
+[
+&#34;MIPS&#34;,
+1991,
+&#34;R4000&#34;,
+1350000,
+1000,
+&#34;213 mm²&#34;
+],
+[
+&#34;ARM&#34;,
+1991,
+&#34;ARM 6&#34;,
+35000,
+1000,
+null
+],
+[
+&#34;Intel&#34;,
+1993,
+&#34;Pentium&#34;,
+3100000,
+800,
+&#34;294 mm²&#34;
+],
+[
+&#34;ARM&#34;,
+1994,
+&#34;ARM700&#34;,
+578977,
+800,
+&#34;68.51 mm²&#34;
+],
+[
+&#34;Acorn/DEC/Apple&#34;,
+1995,
+&#34;SA-110&#34;,
+2500000,
+350,
+&#34;50 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1995,
+&#34;Pentium Pro&#34;,
+5500000,
+500,
+&#34;307 mm²&#34;
+],
+[
+&#34;AMD&#34;,
+1996,
+&#34;AMD K5&#34;,
+4300000,
+500,
+&#34;251 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1997,
+&#34;Pentium II Klamath&#34;,
+7500000,
+350,
+&#34;195 mm²&#34;
+],
+[
+&#34;AMD&#34;,
+1997,
+&#34;AMD K6&#34;,
+8800000,
+350,
+&#34;162 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1998,
+&#34;Pentium II Deschutes&#34;,
+7500000,
+250,
+&#34;113 mm²&#34;
+],
+[
+&#34;Acorn&#34;,
+1999,
+&#34;ARM 9TDMI&#34;,
+111000,
+350,
+&#34;4.8 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+1999,
+&#34;Pentium II Mobile Dixon&#34;,
+27400000,
+180,
+&#34;180 mm²&#34;
+],
+[
+&#34;AMD&#34;,
+1999,
+&#34;AMD K7&#34;,
+2.2e+07,
+250,
+&#34;184 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2000,
+&#34;Pentium III Coppermine&#34;,
+2.1e+07,
+180,
+&#34;80 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2001,
+&#34;Pentium III Tualatin&#34;,
+4.5e+07,
+130,
+&#34;81 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2002,
+&#34;Pentium 4 Northwood&#34;,
+5.5e+07,
+130,
+&#34;145 mm²&#34;
+],
+[
+&#34;AMD&#34;,
+2003,
+&#34;Barton&#34;,
+54300000,
+130,
+&#34;101 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2004,
+&#34;Pentium 4 Prescott&#34;,
+1.12e+08,
+90,
+&#34;110 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2005,
+&#34;Pentium 4 Prescott-2M&#34;,
+1.69e+08,
+90,
+&#34;143 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2006,
+&#34;Pentium 4 Cedar Mill&#34;,
+1.84e+08,
+65,
+&#34;90 mm²&#34;
+],
+[
+&#34;Sony/IBM/Toshiba&#34;,
+2006,
+&#34;Cell&#34;,
+2.41e+08,
+90,
+&#34;221 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2007,
+&#34;Core 2 Duo Allendale&#34;,
+1.69e+08,
+65,
+&#34;111 mm²&#34;
+],
+[
+&#34;AMD&#34;,
+2007,
+&#34;AMD K10 quad-core 2M L3&#34;,
+4.63e+08,
+65,
+&#34;283 mm²&#34;
+],
+[
+&#34;ARM&#34;,
+2007,
+&#34;ARM Cortex-A9&#34;,
+2.6e+07,
+45,
+&#34;31 mm²&#34;
+],
+[
+&#34;IBM&#34;,
+2007,
+&#34;POWER6&#34;,
+7.89e+08,
+65,
+&#34;341 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2008,
+&#34;Atom&#34;,
+4.7e+07,
+45,
+&#34;24 mm²&#34;
+],
+[
+&#34;AMD&#34;,
+2008,
+&#34;AMD K10 quad-core 6M L3&#34;,
+7.58e+08,
+45,
+&#34;258 mm²&#34;
+],
+[
+&#34;AMD&#34;,
+2009,
+&#34;Six-core Opteron 2400&#34;,
+9.04e+08,
+45,
+&#34;346 mm²&#34;
+],
+[
+&#34;Sun/Oracle&#34;,
+2010,
+&#34;16-core SPARC T3&#34;,
+1e+09,
+40,
+&#34;377 mm²&#34;
+],
+[
+&#34;IBM&#34;,
+2010,
+&#34;8-core POWER7 32M L3&#34;,
+1.2e+09,
+45,
+&#34;567 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2011,
+&#34;Quad-core + GPU Core i7&#34;,
+1.16e+09,
+32,
+&#34;216 mm²&#34;
+],
+[
+&#34;AMD&#34;,
+2012,
+&#34;8-core AMD Bulldozer&#34;,
+1.2e+09,
+32,
+&#34;315 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2012,
+&#34;Quad-core + GPU Core i7 Ivy Bridge&#34;,
+1.4e+09,
+22,
+&#34;160 mm²&#34;
+],
+[
+&#34;IBM&#34;,
+2012,
+&#34;8-core POWER7+ 80 MB L3 cache&#34;,
+2.1e+09,
+32,
+&#34;567 mm²&#34;
+],
+[
+&#34;Apple&#34;,
+2013,
+&#34;Apple A7 (dual-core ARM64 \&#34;mobile SoC\&#34;)&#34;,
+1e+09,
+28,
+&#34;102 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2013,
+&#34;Six-core Core i7 Ivy Bridge E&#34;,
+1.86e+09,
+22,
+&#34;256 mm²&#34;
+],
+[
+&#34;IBM&#34;,
+2013,
+&#34;12-core POWER8&#34;,
+4.2e+09,
+22,
+&#34;650 mm²&#34;
+],
+[
+&#34;Microsoft/AMD&#34;,
+2013,
+&#34;Xbox One main SoC&#34;,
+5e+09,
+28,
+&#34;363 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2014,
+&#34;Quad-core + GPU Core i7 Haswell&#34;,
+1.4e+09,
+22,
+&#34;177 mm²&#34;
+],
+[
+&#34;Apple&#34;,
+2014,
+&#34;Apple A8 (dual-core ARM64 \&#34;mobile SoC\&#34;)&#34;,
+2e+09,
+20,
+&#34;89 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2015,
+&#34;Quad-core + GPU GT2 Core i7 Skylake K&#34;,
+1.75e+09,
+14,
+&#34;122 mm²&#34;
+],
+[
+&#34;IBM&#34;,
+2015,
+&#34;IBM z13&#34;,
+3.99e+09,
+22,
+&#34;678 mm²&#34;
+],
+[
+&#34;Oracle&#34;,
+2015,
+&#34;SPARC M7&#34;,
+1e+10,
+20,
+null
+],
+[
+&#34;Apple&#34;,
+2016,
+&#34;Apple A10 (quad-core ARM64 \&#34;mobile SoC\&#34;)&#34;,
+3.3e+09,
+16,
+&#34;125 mm²&#34;
+],
+[
+&#34;Intel&#34;,
+2016,
+&#34;22-core Xeon Broadwell-E5&#34;,
+7.2e+09,
+14,
+&#34;456 mm²&#34;
 ] 
 ];
 data.addColumn(&#39;string&#39;,&#39;Designer&#39;);
@@ -208,15 +690,15 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartMotionChartID181418a4593() {
-var data = gvisDataMotionChartID181418a4593();
+function drawChartMotionChartID293876222b0f() {
+var data = gvisDataMotionChartID293876222b0f();
 var options = {};
 options[&#34;width&#34;] = 600;
 options[&#34;height&#34;] = 500;
 options[&#34;state&#34;] = &#34;\n{\&#34;xAxisOption\&#34;:\&#34;4\&#34;,\&#34;yAxisOption\&#34;:\&#34;3\&#34;,\&#34;dimensions\&#34;:{\&#34;iconDimensions\&#34;:[\&#34;dim0\&#34;]}}\n&#34;;
 
     var chart = new google.visualization.MotionChart(
-    document.getElementById(&#39;MotionChartID181418a4593&#39;)
+    document.getElementById(&#39;MotionChartID293876222b0f&#39;)
     );
     chart.draw(data,options);
     
@@ -240,9 +722,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartMotionChartID181418a4593);
+callbacks.push(drawChartMotionChartID293876222b0f);
 })();
-function displayChartMotionChartID181418a4593() {
+function displayChartMotionChartID293876222b0f() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -265,20 +747,20 @@ callbacks.shift()();
 // jsFooter
 &lt;/script&gt;
 &lt;!-- jsChart --&gt;
-&lt;script type=&#34;text/javascript&#34; src=&#34;https://www.google.com/jsapi?callback=displayChartMotionChartID181418a4593&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://www.google.com/jsapi?callback=displayChartMotionChartID293876222b0f&#34;&gt;&lt;/script&gt;
 &lt;!-- divChart --&gt;
-&lt;div id=&#34;MotionChartID181418a4593&#34; style=&#34;width: 600; height: 500;&#34;&gt;
+&lt;div id=&#34;MotionChartID293876222b0f&#34; style=&#34;width: 600; height: 500;&#34;&gt;
 
 &lt;/div&gt;
 &lt;div&gt;
-&lt;span&gt;Data: node • Chart ID: &lt;a href=&#34;Chart_MotionChartID181418a4593.html&#34;&gt;MotionChartID181418a4593&lt;/a&gt; • &lt;a href=&#34;https://github.com/mages/googleVis&#34;&gt;googleVis-0.6.2&lt;/a&gt;&lt;/span&gt;&lt;br /&gt; &lt;!-- htmlFooter --&gt; &lt;span&gt; R version 3.3.2 (2016-10-31) • &lt;a href=&#34;https://developers.google.com/terms/&#34;&gt;Google Terms of Use&lt;/a&gt; • &lt;a href=&#34;https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart&#34;&gt;Documentation and Data Policy&lt;/a&gt; &lt;/span&gt;
+&lt;span&gt;Data: node • Chart ID: &lt;a href=&#34;Chart_MotionChartID293876222b0f.html&#34;&gt;MotionChartID293876222b0f&lt;/a&gt; • &lt;a href=&#34;https://github.com/mages/googleVis&#34;&gt;googleVis-0.6.2&lt;/a&gt;&lt;/span&gt;&lt;br /&gt; &lt;!-- htmlFooter --&gt; &lt;span&gt; R version 3.3.2 (2016-10-31) • &lt;a href=&#34;https://developers.google.com/terms/&#34;&gt;Google Terms of Use&lt;/a&gt; • &lt;a href=&#34;https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart&#34;&gt;Documentation and Data Policy&lt;/a&gt; &lt;/span&gt;
 &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-&lt;p&gt;Issues found:&lt;/p&gt;
+&lt;p&gt;Issues found and resolved:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Note to be able to display googleVis chart: resolved with macro setting on the manual&lt;/li&gt;
-&lt;li&gt;Default setting modification&lt;/li&gt;
+&lt;li&gt;Display googleVis chart locally: resolved with security setting of &lt;a href=&#34;http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html&#34;&gt;macromedia&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Settings for rmarkdown “op &amp;lt;- options(gvis.plot.tag=‘chart’)” and place “results=‘asis’” in the chuck option&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;

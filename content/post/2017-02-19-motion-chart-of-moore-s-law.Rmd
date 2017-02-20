@@ -1,5 +1,5 @@
 ---
-title: "Motion Chart of Moore's Law"
+title: "Moore's Law in Motion"
 author: "Richard Yang"
 date: '2017-02-19'
 categories:
@@ -19,7 +19,7 @@ op <- options(gvis.plot.tag='chart')
 ```
 
 ## Objectives
-Moore's law has been the golden law to predict the semiconductor device size and guide the long-term planning of semiconductor industry in the last 3 decades. It has been accuractely describing a driving force behind technological and economical growth.
+Moore's law has been the golden law to predict the semiconductor device size and guide the long-term planning of semiconductor industry in the last 3 decades. It has been accurately describing a driving force behind technological and economical growth.
 
 This post is to visualize Moore's law in semiconductor manufacturing. 
 
@@ -28,7 +28,7 @@ This post is to visualize Moore's law in semiconductor manufacturing.
 Main work flow to construct motion chart of Moore's law require following steps:
 
 1. Scape data from credible sources
-2. Formate data for motion chart
+2. Format data for motion chart
 3. Generate motion chart with GoogleVis package
 4. Deploy to website with blogdown
 
@@ -37,11 +37,11 @@ Main work flow to construct motion chart of Moore's law require following steps:
 ### Review of Prior Art
 Moore's law predicted that chip performance would double every 18 months, a driving force to shrink the device constantly over the time.
 
-The data source of this report would be parsed from Wiki pages, which are reliable and consistent with other published results: [Moore's Law ](https://en.wikipedia.org/wiki/Moore%27s_law), [device dimension] (https://en.wikipedia.org/wiki/Semiconductor_device_fabrication) and [transistor counts](https://en.wikipedia.org/wiki/Transistor_count).
+The data source of this report would be parsed from Wiki pages, which are reliable and consistent with other published results: [Moore's Law ](https://en.wikipedia.org/wiki/Moore%27s_law), [device dimension](https://en.wikipedia.org/wiki/Semiconductor_device_fabrication) and [transistor counts](https://en.wikipedia.org/wiki/Transistor_count).
 
 The data can be scrapped from html tables directly from R packages. This report start with manual construction of data table from above source.
 
-Motion chart was first demonstrated by Hans Rosling. The chart is made possible by [GoogleVis package](https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html).
+Motion chart was first demonstrated by Hans Rosling. The chart is made possible by [googleVis package](https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html).
 
 ### Prepare data 
 
@@ -49,22 +49,25 @@ The data has been manually constructed in as a csv file. A minor issue with test
 
 ```{r data}
 setwd("D:/Data-Yang/Blog/semiexpert")
-node <- read_excel("data/Moore_law.xlsx",sheet="count")
+node <- read_excel("data/Moore_law.xlsx",sheet="node")
 head(node)
 
 ```
 
 Basic motion chart can be constructed by passing the time and id variables. To visualize the shrinking of device nodes and increasing transistor counts, it is better to visualize different vendor's technology, such as Intel, TI, IBM and AMD.
 
-Data clean-up needed:
+### Clean up data:
 
 1. Import html data table from wiki page
 2. Remove notes to the year and nodes
-3. Format year and process.node
-4. Unique rows or idvar and time var
-5. Set x axis to node.nm and y axis to transistor count
+3. Format year and process.node to be numeric
 
-```{r motion chart, results='asis', tidy=FALSE}
+### Motion Chart 
+
+This is to illustrate the shrink of device node over time and increasing transistor count. idvar has been set to Designer to illustrate various player over the time. One unique performer is Intel could been seen growth over time.
+
+
+```{r motion chart, results='asis', tidy=FALSE, echo=TRUE}
 M <- gvisMotionChart(node, 
                        idvar="Designer", 
                        timevar="year",
@@ -74,10 +77,10 @@ print(M)
 
 ```
 
-Issues found:
+Issues found and resolved:
 
-- Note to be able to display googleVis chart: resolved with macro setting on the manual
-- Default setting modification
+- Display googleVis chart locally: resolved with security setting of [macromedia](http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html)
+- Settings for rmarkdown "op <- options(gvis.plot.tag='chart')" and place "results='asis'" in the chuck option
 
 ## Round up
 
