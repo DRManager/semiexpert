@@ -1,4 +1,4 @@
-baseurl = "https://drmanager.github.io/semiexpert"
+baseurl = "/"
 publishDir = "docs"
 relativeurls = true
 languageCode = "en-us"
