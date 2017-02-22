@@ -5,7 +5,7 @@ languageCode = "en-us"
 title = "Lithium Theme"
 theme = "hugo-lithium-theme"
 googleAnalytics = ""
-disqusShortname = "disqus_Ao0RZ5khaJ"
+disqusShortname = "semiexpert"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 
 [permalinks]
