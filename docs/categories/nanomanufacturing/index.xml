@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nanomanufacturing on Lithium Theme</title>
-    <link>/categories/nanomanufacturing/index.xml</link>
-    <description>Recent content in Nanomanufacturing on Lithium Theme</description>
+    <title>Nanomanufacturing on R for Nanomanufacturing</title>
+    <link>https://drmanager.github.io/semiexpert/categories/nanomanufacturing/index.xml</link>
+    <description>Recent content in Nanomanufacturing on R for Nanomanufacturing</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="/categories/nanomanufacturing/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://drmanager.github.io/semiexpert/categories/nanomanufacturing/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>R and Its Applications for Nanomanufacturing</title>
-      <link>/2017/02/19/r-and-its-applications-for-nanomanufacturing/</link>
+      <link>https://drmanager.github.io/semiexpert/2017/02/19/r-and-its-applications-for-nanomanufacturing/</link>
       <pubDate>Sun, 19 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/02/19/r-and-its-applications-for-nanomanufacturing/</guid>
+      <guid>https://drmanager.github.io/semiexpert/2017/02/19/r-and-its-applications-for-nanomanufacturing/</guid>
       <description>&lt;!-- BLOGDOWN-HEAD --&gt;
 
 

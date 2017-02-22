@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Lithium Theme</title>
-    <link>/post/index.xml</link>
-    <description>Recent content in Posts on Lithium Theme</description>
+    <title>Posts on R for Nanomanufacturing</title>
+    <link>https://drmanager.github.io/semiexpert/post/index.xml</link>
+    <description>Recent content in Posts on R for Nanomanufacturing</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 19 Feb 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://drmanager.github.io/semiexpert/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Moore&#39;s Law in Motion</title>
-      <link>/2017/02/19/moores-law-in-motion/</link>
+      <link>https://drmanager.github.io/semiexpert/2017/02/19/moores-law-in-motion/</link>
       <pubDate>Sun, 19 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/02/19/moores-law-in-motion/</guid>
+      <guid>https://drmanager.github.io/semiexpert/2017/02/19/moores-law-in-motion/</guid>
       <description>&lt;!-- BLOGDOWN-HEAD --&gt;
 
 
@@ -85,7 +85,7 @@ print(M)&lt;/code&gt;&lt;/pre&gt;
 &lt;html xmlns=&#34;http://www.w3.org/1999/xhtml&#34;&gt;
 &lt;head&gt;
 &lt;title&gt;
-MotionChartID2b3437d5b6b
+MotionChartID21bc51471b4b
 &lt;/title&gt;
 &lt;meta http-equiv=&#34;content-type&#34; content=&#34;text/html;charset=utf-8&#34; /&gt;
 &lt;style type=&#34;text/css&#34;&gt;
@@ -101,12 +101,12 @@ body {
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;p&gt;&lt;!-- MotionChart generated in R 3.3.2 by googleVis 0.6.2 package --&gt; &lt;!-- Tue Feb 21 21:28:44 2017 --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;!-- MotionChart generated in R 3.3.2 by googleVis 0.6.2 package --&gt; &lt;!-- Tue Feb 21 21:52:02 2017 --&gt;&lt;/p&gt;
 &lt;!-- jsHeader --&gt;
 &lt;script type=&#34;text/javascript&#34;&gt;
  
 // jsData 
-function gvisDataMotionChartID2b3437d5b6b () {
+function gvisDataMotionChartID21bc51471b4b () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -690,15 +690,15 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartMotionChartID2b3437d5b6b() {
-var data = gvisDataMotionChartID2b3437d5b6b();
+function drawChartMotionChartID21bc51471b4b() {
+var data = gvisDataMotionChartID21bc51471b4b();
 var options = {};
 options[&#34;width&#34;] = 600;
 options[&#34;height&#34;] = 500;
 options[&#34;state&#34;] = &#34;\n{\&#34;xAxisOption\&#34;:\&#34;4\&#34;,\&#34;yAxisOption\&#34;:\&#34;3\&#34;,\&#34;dimensions\&#34;:{\&#34;iconDimensions\&#34;:[\&#34;dim0\&#34;]}}\n&#34;;
 
     var chart = new google.visualization.MotionChart(
-    document.getElementById(&#39;MotionChartID2b3437d5b6b&#39;)
+    document.getElementById(&#39;MotionChartID21bc51471b4b&#39;)
     );
     chart.draw(data,options);
     
@@ -722,9 +722,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartMotionChartID2b3437d5b6b);
+callbacks.push(drawChartMotionChartID21bc51471b4b);
 })();
-function displayChartMotionChartID2b3437d5b6b() {
+function displayChartMotionChartID21bc51471b4b() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -747,13 +747,13 @@ callbacks.shift()();
 // jsFooter
 &lt;/script&gt;
 &lt;!-- jsChart --&gt;
-&lt;script type=&#34;text/javascript&#34; src=&#34;https://www.google.com/jsapi?callback=displayChartMotionChartID2b3437d5b6b&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://www.google.com/jsapi?callback=displayChartMotionChartID21bc51471b4b&#34;&gt;&lt;/script&gt;
 &lt;!-- divChart --&gt;
-&lt;div id=&#34;MotionChartID2b3437d5b6b&#34; style=&#34;width: 600; height: 500;&#34;&gt;
+&lt;div id=&#34;MotionChartID21bc51471b4b&#34; style=&#34;width: 600; height: 500;&#34;&gt;
 
 &lt;/div&gt;
 &lt;div&gt;
-&lt;span&gt;Data: node • Chart ID: &lt;a href=&#34;Chart_MotionChartID2b3437d5b6b.html&#34;&gt;MotionChartID2b3437d5b6b&lt;/a&gt; • &lt;a href=&#34;https://github.com/mages/googleVis&#34;&gt;googleVis-0.6.2&lt;/a&gt;&lt;/span&gt;&lt;br /&gt; &lt;!-- htmlFooter --&gt; &lt;span&gt; R version 3.3.2 (2016-10-31) • &lt;a href=&#34;https://developers.google.com/terms/&#34;&gt;Google Terms of Use&lt;/a&gt; • &lt;a href=&#34;https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart&#34;&gt;Documentation and Data Policy&lt;/a&gt; &lt;/span&gt;
+&lt;span&gt;Data: node • Chart ID: &lt;a href=&#34;Chart_MotionChartID21bc51471b4b.html&#34;&gt;MotionChartID21bc51471b4b&lt;/a&gt; • &lt;a href=&#34;https://github.com/mages/googleVis&#34;&gt;googleVis-0.6.2&lt;/a&gt;&lt;/span&gt;&lt;br /&gt; &lt;!-- htmlFooter --&gt; &lt;span&gt; R version 3.3.2 (2016-10-31) • &lt;a href=&#34;https://developers.google.com/terms/&#34;&gt;Google Terms of Use&lt;/a&gt; • &lt;a href=&#34;https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart&#34;&gt;Documentation and Data Policy&lt;/a&gt; &lt;/span&gt;
 &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -773,10 +773,10 @@ callbacks.shift()();
     
     <item>
       <title>R and Its Applications for Nanomanufacturing</title>
-      <link>/2017/02/19/r-and-its-applications-for-nanomanufacturing/</link>
+      <link>https://drmanager.github.io/semiexpert/2017/02/19/r-and-its-applications-for-nanomanufacturing/</link>
       <pubDate>Sun, 19 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/02/19/r-and-its-applications-for-nanomanufacturing/</guid>
+      <guid>https://drmanager.github.io/semiexpert/2017/02/19/r-and-its-applications-for-nanomanufacturing/</guid>
       <description>&lt;!-- BLOGDOWN-HEAD --&gt;
 
 
