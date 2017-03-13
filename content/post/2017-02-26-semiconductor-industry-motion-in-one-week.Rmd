@@ -1,0 +1,70 @@
+---
+title: Semiconductor Industry Motion in One Week
+author: Richard Yang
+date: '2017-02-26'
+categories:
+  - R
+  - nanomanufacturing
+  - conference
+tags:
+  - R
+  - SPIE
+---
+```{r setup, echo=FALSE, warning=FALSE}
+library(Quandl)
+library(dygraphs)
+
+```
+
+
+## Semiconductor Capital Equipment Spending
+
+## SPIE Advanced Lithography Conference
+
+## ASML
+
+### ASML public stock
+
+Pull two year data from Google finacial source. Online website only allow last 9 months for daily data. The Quandl package is able to pull specified data with ticker "NASDAQ_ASML" from 01/01/2015.
+
+```{r data}
+ASML <-Quandl("GOOG/NASDAQ_ASML",start_date="2015-01-01",type="ts")
+
+str(ASML)
+
+```
+
+The data can be made interactive with dygraph package. It allow zoom into specific peroid and find stock price of particlar date.
+```{r close price}
+dygraph(ASML$Close) %>% dyRangeSelector()
+
+```
+
+Last two SPIE conference date:
+
+- 21-25 February 2016
+- 22-26 February 2015
+
+Include one weeks prior and post the conference. In both peroid, ASML stock jumpped 
+```{r compare}
+SPIE.2017 <-Quandl("GOOG/NASDAQ_ASML",start_date="2017-02-20",end_date="2017-03-04", type="ts")
+
+SPIE.2016 <-Quandl("GOOG/NASDAQ_ASML",start_date="2016-02-15",end_date="2016-03-04", type="ts")
+
+SPIE.2015 <-Quandl("GOOG/NASDAQ_ASML",start_date="2015-02-16",end_date="2015-03-05", type="ts")
+
+ASML.SPIE <- cbind(SPIE.2017$Close, SPIE.2016$Close, SPIE.2015$Close)
+colnames(ASML.SPIE) <- c("SPIE.2017", "SPIE.2016", "SPIE.2015")
+
+dygraph(ASML.SPIE,ylab="Close", 
+        main="ASML Stock movement during SPIE conferences") %>%
+   dySeries("SPIE.2017",label="SPIE.2017") %>%
+  dySeries("SPIE.2016",label="SPIE.2016") %>%
+  dySeries("SPIE.2015",label="SPIE.2015") %>%
+  dyOptions(colors = c("blue","brown","green")) %>%
+  dyRangeSelector()
+
+```
+
+
+## Round up

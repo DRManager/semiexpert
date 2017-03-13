@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>/2017/03/12/overview-of-spie-advanced-litho-conference-with-r/</loc>
+    <lastmod>2017-03-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/02/26/semiconductor-industry-motion-in-one-week/</loc>
+    <lastmod>2017-02-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/about/</loc>
     <lastmod>2017-02-19T21:48:51-07:00</lastmod>
   </url>
@@ -22,6 +32,12 @@
   </url>
   
   <url>
+    <loc>/categories/conference/</loc>
+    <lastmod>2017-03-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/moores-law/</loc>
     <lastmod>2017-02-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -35,19 +51,42 @@
   
   <url>
     <loc>/categories/nanomanufacturing/</loc>
-    <lastmod>2017-02-19T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-02-19T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2017-03-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2017-03-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-02-19T21:48:51-07:00</lastmod>
+    <lastmod>2017-03-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/spie/</loc>
+    <lastmod>2017-03-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
     <priority>0</priority>
   </url>
   

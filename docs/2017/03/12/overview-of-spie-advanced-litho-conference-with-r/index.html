@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.18.1" />
+
+
+<title>Overview of SPIE Advanced Litho Conference with R - R for Nanomanufacturing</title>
+<meta property="og:title" content="Overview of SPIE Advanced Litho Conference with R - R for Nanomanufacturing">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/github.min.css' rel='stylesheet' type='text/css'>
+
+
+
+<link rel="stylesheet" href="../../../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../../../css/main.css" media="all">
+
+
+
+
+<script src="../../../../rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<link href="../../../../rmarkdown-libs/wordcloud2/wordcloud.css" rel="stylesheet" />
+<script src="../../../../rmarkdown-libs/wordcloud2/wordcloud2-all.js"></script>
+<script src="../../../../rmarkdown-libs/wordcloud2/hover.js"></script>
+<script src="../../../../rmarkdown-libs/wordcloud2-binding/wordcloud2.js"></script>
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../../../" class="nav-logo">
+    <img src="../../../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../../../about/">About</a></li>
+    
+    <li><a href="https://drmanager.github.io/semiexpert">Home</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">4 min read</span>
+    
+
+    <h1 class="article-title">Overview of SPIE Advanced Litho Conference with R</h1>
+
+    
+    <span class="article-date">March 12, 2017</span>
+    
+
+    <div class="article-content">
+
+
+
+<div id="objectives" class="section level2">
+<h2>Objectives</h2>
+<p>With busy work schedule, it is very difficult for Corporate professionals to spare time for attending conference. It is even challenge to be capture the overall technology trends with multi-sessions on-going parallel. The objectives of this topics are two folds:</p>
+<ul>
+<li>Create a workflow to overview the topics of the conference</li>
+<li>Establish methodology for unsupervised learning of topics</li>
+</ul>
+<p>The exercise is down within R environment.</p>
+</div>
+<div id="workflow" class="section level2">
+<h2>Workflow</h2>
+<p>The workflow includes the following steps:</p>
+<ul>
+<li>Download program and abstracts from conference website</li>
+<li>Read files into R environment</li>
+<li>Pre-processing of the data</li>
+<li>Convert into text mining format</li>
+<li>Visualization</li>
+<li>Validation and confirmation</li>
+</ul>
+</div>
+<div id="solution-in-r" class="section level2">
+<h2>Solution in R</h2>
+<div id="download-the-program" class="section level3">
+<h3>Download the program</h3>
+<p>First download the program file from conference website <a href="http://spie.org/Documents/ConferencesExhibitions/AL17-FINAL-L.pdf">link</a> and save to download folder. Note that within blogdown, the working folder is point to the post. Add “/” before “download” folder saved file to “D:/download/”.</p>
+<p>The process is done with <strong>curl</strong> package.</p>
+<pre class="r"><code>url &lt;- &quot;http://spie.org/Documents/ConferencesExhibitions/AL17-FINAL-L.pdf&quot;
+curl_download(url,&quot;/download/program.pdf&quot;)</code></pre>
+</div>
+<div id="read-file-into-r-enviroment" class="section level3">
+<h3>Read file into R enviroment</h3>
+<p>Note the download program file is PDF file. Here we use pdftools package to read it into text format. The program is saved in an object with one page per vector.</p>
+<pre class="r"><code>pdf_file &lt;- file.path(&quot;/download&quot;, &quot;program.pdf&quot;)
+#info &lt;- pdf_info(pdf_file)
+program &lt;- pdf_text(pdf_file)
+#First page of the program
+cat(program[1])</code></pre>
+<pre><code>##                            CONNECTING MINDS.
+##                            ADVANCING LIGHT.
+##                                 2017
+## TECHNICAL PROGRAM
+## San Jose Marriott and
+## San Jose Convention Center
+## San Jose, California, USA
+## Conferences &amp; Courses
+## 26 February2 March 2017
+## Exhibition
+## 28 February1 March 2017</code></pre>
+</div>
+<div id="pre-processing-of-the-data" class="section level3">
+<h3>Pre-processing of the data</h3>
+<p>The program data can be converted into a Corpus object with tm package. It would then allow using tm_map function to clean the files, such as remove white space, numbers and typical stop words.</p>
+<pre class="r"><code>#shape into corpus, strip whitespace and numbers
+text_corpus &lt;- Corpus(VectorSource(program))
+
+#clean up 
+corpus_clean &lt;- tm_map(text_corpus, stripWhitespace)
+corpus_clean &lt;- tm_map(corpus_clean, removeNumbers)
+corpus_clean &lt;- tm_map(corpus_clean, content_transformer(tolower))
+corpus_clean &lt;- tm_map(corpus_clean, removePunctuation)
+
+# Remove stopwords from English
+corpus_clean &lt;- tm_map(corpus_clean, removeWords, stopwords(&quot;english&quot;))
+
+my_stopwords &lt;- c(&quot;e-ii&quot;,&quot;can&quot;,&quot;due&quot;,&quot;will&quot;, # additional user-defined stop words
+                  &quot;fig&quot;,&quot;figs&quot;,&quot;figure&quot;,&quot;online&quot;, # stop words related to figure captions
+                  &quot;session&quot;, &quot;inc&quot;,&quot;ltd&quot;, &quot;corp&quot;, &quot;sps&quot;,&quot;spwed&quot;,&quot;spswed&quot;,&quot;spstue&quot;, &quot;committee&quot;,&quot;conference&quot;,&quot;chair&quot;,&quot;program&quot;,&quot;univ&quot;) # stop words related to the conference
+
+corpus_clean &lt;- tm_map(corpus_clean, removeWords, my_stopwords)</code></pre>
+</div>
+<div id="convert-into-text-mining-format" class="section level3">
+<h3>Convert into text mining format</h3>
+<p>Text mining package works with TermDocumentMatrix format, which stores term in row and documents in columns. The file tdm has 6250 terms and 76 documents (76 pages from program file).</p>
+<p>After converting tdm, we can do some statistics of word and frequency of appearance in the program file. The plot output words that have appeared more than 100 times.</p>
+<pre class="r"><code>tdm &lt;- TermDocumentMatrix(corpus_clean)
+
+m &lt;- as.matrix(tdm)
+v &lt;- sort(rowSums(m),decreasing=TRUE)
+d &lt;- data.frame(word = names(v),freq=v)
+
+d %&gt;% filter(freq&gt;100) %&gt;%
+  ggplot(aes(x=word, y=freq)) +
+   geom_bar(stat = &quot;identity&quot;) +
+  xlab(NULL) +
+  coord_flip()</code></pre>
+<p><img src="figures/dtm-1.png" width="672" /></p>
+</div>
+<div id="visualization" class="section level3">
+<h3>Visualization</h3>
+<p>After several iteration of word processing and checking frequency, we can select the top 100 words to display with wordcloud.</p>
+<p>The wordcloud is processing the same data as barchart. It list key words size vs frequency of the word appearance within the document. It is obvious that this is a spie lithography conference. Other top appearance indicating the topics of the program such as:</p>
+<p>1.EUV 2.DSA 3.Design</p>
+<p>Other top words seems to be related to the corporate affiliation and their regimes:</p>
+<ol style="list-style-type: decimal">
+<li>IBM</li>
+<li>ASML and Netherlands</li>
+<li>imec and Belgium</li>
+</ol>
+<p>Other top regimes include Korea and Japan.</p>
+<pre class="r"><code>wordcloud2(head(d,100))</code></pre>
+<div id="htmlwidget-0794590ebe43fdf6cdea" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0794590ebe43fdf6cdea">{"x":{"word":["usa","lithography","japan","spie","technology","euv","belgium","netherlands","materials","patterning","asml","advanced","research","ibm","kim","process","korea","globalfoundries","center","france","convention","imec","chairs","germany","location","taiwan","republic","ctr","metrology","lee","design","institute","electron","national","chen","using","manufacturing","control","semiconductor","thomas","tokyo","michael","paper","wed","tue","paul","park","john","llc","china","america","david","van","registration","conferences","technologies","gmbh","zhang","daniel","break","liu","invited","onsite","robert","synopsys","switzerland","peter","poster","optical","processes","presentation","thu","inspection","klatencor","graphics","mentor","lin","microlithography","eric","yang","award","resist","joint","news","richard","dsa","overlay","lab","coffee","wang","march","new","performance","texas","watson","etch","wwwspieorgalnewsÃ¢â‚¬Æ’Ã¢â‚¬Æ’spielitho","Ã¢â‚¬Æ’Ã¢â‚¬Æ’helpspieorg","Ã¢â‚¬Æ’Ã¢â‚¬Æ’wwwspieorgalÃ¢â‚¬Æ’","lawrence"],"freq":[843,190,186,169,155,145,142,136,129,122,120,118,116,112,111,110,110,109,105,105,103,100,98,96,96,93,92,91,88,85,75,74,74,73,72,72,71,70,70,70,70,69,66,65,64,64,61,60,59,59,57,57,57,56,55,55,54,54,54,53,53,52,51,49,48,48,48,47,46,46,46,46,45,45,45,45,44,44,44,44,43,43,43,42,42,42,41,40,39,39,38,37,37,37,37,36,36,36,36,36],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.213523131672598,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="validation-and-confirmation" class="section level3">
+<h3>Validation and confirmation</h3>
+<p>The text mining itself could not substitute read the program file to understand the events and topics with the conference. The next step is to read the program and validate some of the findings from data mining.</p>
+<p>It could be confirmed the EUV topic has prominent space within SPIE Advanced Litho conference. In fact, conference 10143 is dedicated for this EUV.</p>
+<p>The program topics include authors and their affiliation. Therefore, it is confirmed that the occurrence of regime within the word cloud is a good indicator of paper submission.</p>
+</div>
+</div>
+<div id="round-up" class="section level2">
+<h2>Round up</h2>
+<p>With this post, a workflow has been established within R environment to download program file from SPIE Advanced Litho conference. A text mining process has been down to visualize topic 100 key words.</p>
+</div>
+<div id="next-work" class="section level2">
+<h2>Next work</h2>
+<p>After a brief view of the topics, it would be interesting to start using machine learning to understand the topics discussed within the conference. There is always several months of time gap between conference and publication of the proceeding. But we could start with the abstract file that is available within the conference <a href="%22http://spie.org/Documents/ConferencesExhibitions/AL17-Abstracts.pdf%22">website</a></p>
+</div>
+
+    </div>
+  </article>
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'semiexpert';
+    var disqus_identifier = '\/2017\/03\/12\/overview-of-spie-advanced-litho-conference-with-r\/';
+    var disqus_title = 'Overview of SPIE Advanced Litho Conference with R';
+    var disqus_url = '\/2017\/03\/12\/overview-of-spie-advanced-litho-conference-with-r\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="../../../../index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="../../../../images/hugo-logo.png" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-54752821-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+
