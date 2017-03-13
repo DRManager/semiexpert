@@ -1,5 +1,5 @@
 ---
-title: Semiconductor Industry Motion in One Week
+title: ASML Stock Movement During SPIE Conference
 author: Richard Yang
 date: '2017-02-26'
 categories:
@@ -10,7 +10,8 @@ tags:
   - R
   - SPIE
 ---
-```{r setup, echo=FALSE, warning=FALSE}
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 library(Quandl)
 library(dygraphs)
 
@@ -68,3 +69,5 @@ dygraph(ASML.SPIE,ylab="Close",
 
 
 ## Round up
+
+ASML stock motion data has been pulled and compared. It is yet to see how would its stock move duing the coming conference. It would next be interesting to mining what topics has been discussed during the conference and correlation with ASML stock movement.
