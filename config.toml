@@ -1,5 +1,5 @@
-baseurl = "/"
-relativeurls = false
+baseurl = "https://drmanager.github.io/semiexpert/"
+relativeurls = true
 publishDir = "docs"
 languageCode = "en-us"
 title = "R for Nanomanufacturing"
