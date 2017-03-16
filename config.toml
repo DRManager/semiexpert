@@ -1,6 +1,6 @@
 baseurl = "https://github.com/DRManager/semiexpert"
 publishDir = "docs"
-relativeurls = false
+relativeurls = true
 languageCode = "en-us"
 title = "R for Nanomanufacturing"
 theme = "hugo-lithium-theme"
@@ -21,7 +21,9 @@ ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 [params]
     description = "A website for R learning and Semiconductor Nanomanufacturing."
     
-  #  disqus_url = "https://drmanager.github.io/semiexpert"
+   disqus_url = "https://drmanager.github.io/semiexpert"
+   
+    AnalyticsID = "UA-93842808-1"
     
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.9.0"
