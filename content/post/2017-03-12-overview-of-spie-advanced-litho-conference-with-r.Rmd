@@ -59,7 +59,7 @@ curl_download(url,"/download/program.pdf")
 
 Note the download program file is PDF file. Here we use pdftools package to read it into text format. The program is saved in an object with one page per vector.  
 
-```{r scrape}
+```{r scrape, cache=TRUE}
 
 pdf_file <- file.path("/download", "program.pdf")
 #info <- pdf_info(pdf_file)
@@ -73,7 +73,7 @@ cat(program[1])
 
 The program data can be converted into a Corpus object with tm package. It would then allow using tm_map function to clean the files, such as remove white space, numbers and typical stop words.
 
-```{r preprocess}
+```{r preprocess, cache=TRUE}
 #shape into corpus, strip whitespace and numbers
 text_corpus <- Corpus(VectorSource(program))
 
