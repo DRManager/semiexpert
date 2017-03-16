@@ -1,4 +1,4 @@
-baseurl = "https://github.com/DRManager/semiexpert"
+baseurl = "/"
 publishDir = "docs"
 relativeurls = true
 languageCode = "en-us"
@@ -21,7 +21,7 @@ ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 [params]
     description = "A website for R learning and Semiconductor Nanomanufacturing."
     
-  #  disqus_url = "https://drmanager.github.io/semiexpert"
+    disqus_url = "https://drmanager.github.io/semiexpert"
     
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.9.0"
