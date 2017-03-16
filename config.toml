@@ -1,6 +1,6 @@
 baseurl = "https://github.com/DRManager/semiexpert/"
 publishDir = "docs"
-relativeurls = true
+relativeurls = false
 languageCode = "en-us"
 title = "R for Nanomanufacturing"
 theme = "hugo-lithium-theme"
