@@ -1,6 +1,6 @@
 baseurl = "https://github.com/DRManager/semiexpert/"
-publishDir = "docs"
 relativeurls = false
+publishDir = "docs"
 languageCode = "en-us"
 title = "R for Nanomanufacturing"
 theme = "hugo-lithium-theme"
@@ -21,7 +21,7 @@ ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 [params]
     description = "A website for R learning and Semiconductor Nanomanufacturing."
     
-   disqus_url = "https://drmanager.github.io/semiexpert"
+   disqus_url = "https://drmanager.github.io/semiexpert/"
    
     AnalyticsID = "UA-93842808-1"
     
